@@ -131,7 +131,8 @@ class FunctionalTest extends Specification {
     }
 
     private void initBuildFile() {
-        String gradlePluginDirectory =  Paths.get('.', 'build', 'libs').toFile().canonicalPath
+        String gradlePluginDirectory =  Paths.get('.', 'build', 'libs').toFile()
+                .canonicalPath.replaceAll('\\\\', '/')
         buildFile = testProjectDir.newFile('build.gradle')
         buildFile << """
             plugins {
@@ -148,7 +149,6 @@ class FunctionalTest extends Specification {
             repositories {
                 flatDir dirs: "$gradlePluginDirectory"
             }
-
         """.stripIndent()
     }
 
